@@ -1,0 +1,16 @@
+{
+  "name": "tami4edge-smarthings-unofficial-lambda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lior Tamam",
+  "license": "ISC",
+  "dependencies": {
+    "axois": "^0.0.1-security",
+    "request-promise-native": "^1.0.9",
+    "st-schema": "^1.4.2"
+  }
+}

@@ -1,0 +1,102 @@
+{
+    "configurations": [
+      {
+        "type": "aws-sam",
+        "request": "direct-invoke",
+        "name": "Tami4EdgeCloudConnect:index.handler (nodejs18.x)",
+        "invokeTarget": {
+          "target": "code",
+          "projectRoot": "${workspaceFolder}/Tami4EdgeCloudConnect",
+          "lambdaHandler": "index.handler"
+        },
+        "lambda": {
+          "runtime": "nodejs18.x",
+          "payload": {},
+          "environmentVariables": {}
+        }
+      },
+      {
+        "type": "aws-sam",
+        "request": "direct-invoke",
+        "name": "Tami4OAuth2:index.handler (nodejs18.x)",
+        "invokeTarget": {
+          "target": "code",
+          "projectRoot": "${workspaceFolder}/Tami4OAuth2",
+          "lambdaHandler": "index.handler"
+        },
+        "lambda": {
+          "runtime": "nodejs18.x",
+          "payload": {},
+          "environmentVariables": {}
+        }
+      },
+      {
+        "name": "Launch GetTami4Token",
+        "program": "${workspaceFolder}/GetTami4Token/index.js",
+        "request": "launch",
+        "skipFiles": [
+          "<node_internals>/**"
+        ],
+        "type": "node"
+      },
+      {
+        "type": "aws-sam",
+        "request": "direct-invoke",
+        "name": "Invoke Lambda",
+        "invokeTarget": {
+          "target": "code",
+          "projectRoot": "Tami4OAuth2",
+          "lambdaHandler": "app.lambdaHandler"
+        },
+        "lambda": {
+          "runtime": "nodejs18.x",
+          "payload": {
+            "json": {
+              "version": "2.0",
+              "routeKey": "$default",
+              "rawPath": "//token",
+              "rawQueryString": "",
+              "headers": {
+                "content-length": "175",
+                "x-amzn-tls-version": "TLSv1.2",
+                "x-datadog-sampling-priority": "-1",
+                "x-forwarded-proto": "https",
+                "x-forwarded-port": "443",
+                "x-datadog-trace-id": "4415482872005325555",
+                "x-forwarded-for": "46.137.129.201",
+                "accept": "*/*",
+                "authorization": "Basic bXljbGllbnRpZDpteWNsaWVudHNlY3JldA==",
+                "x-amzn-tls-cipher-suite": "ECDHE-RSA-AES128-GCM-SHA256",
+                "x-datadog-parent-id": "6208862194921328614",
+                "x-amzn-trace-id": "Root=1-640cb0fa-0331c9923ac914e179275061",
+                "host": "z33fqxqq3mfyhegi7cpoeew4rm0lbidu.lambda-url.eu-west-1.on.aws",
+                "content-type": "application/x-www-form-urlencoded",
+                "accept-encoding": "gzip,deflate",
+                "user-agent": "SmartThings Integration"
+              },
+              "requestContext": {
+                "accountId": "anonymous",
+                "apiId": "z33fqxqq3mfyhegi7cpoeew4rm0lbidu",
+                "domainName": "z33fqxqq3mfyhegi7cpoeew4rm0lbidu.lambda-url.eu-west-1.on.aws",
+                "domainPrefix": "z33fqxqq3mfyhegi7cpoeew4rm0lbidu",
+                "http": {
+                  "method": "POST",
+                  "path": "/token",
+                  "protocol": "HTTP/1.1",
+                  "sourceIp": "46.137.129.201",
+                  "userAgent": "SmartThings Integration"
+                },
+                "requestId": "509c632a-440d-4dd6-8415-dc63acb93edf",
+                "routeKey": "$default",
+                "stage": "$default",
+                "time": "11/Mar/2023:16:48:58 +0000",
+                "timeEpoch": 1678553338377
+              },
+              "body": "Y2xpZW50X2lkPW15Y2xpZW50aWQmY2xpZW50X3NlY3JldD1teWNsaWVudHNlY3JldCZncmFudF90eXBlPWF1dGhvcml6YXRpb25fY29kZSZjb2RlPW15LWF1dGhvcml6YXRpb24tY29kZSZyZWRpcmVjdF91cmk9aHR0cHMlM0ElMkYlMkZjMmMtZXUuc21hcnR0aGluZ3MuY29tJTJGb2F1dGglMkZjYWxsYmFjaw==",
+              "isBase64Encoded": true
+            }
+          }
+        }
+      }
+    ]
+}
